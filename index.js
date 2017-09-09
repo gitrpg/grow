@@ -1,17 +1,16 @@
 ;(function(){
-   document.body.appendChild(
-     Object.assign(
-       document.createElement("script"),
-       {src: 'https://unpkg.com/requirejs/require.js', onload: Main}
-     )
-   );
-
    function Main(){
-      document.querySelector("pre[lang='videoframe']").forEach(function(f){
+      document.querySelectorAll("pre[lang='videoframe']").forEach(function(f){
          var code = f.querySelector("code").innerText;
-         var e = document.createElement("iframe");
-         e.src = code;
-         f.insertAdjacentElement("afterEnd", e);
+         var button = document.createElement("button");
+         button.className = 'btn btn-primary btn-sm';
+         button.innerText = "Play";
+         button.addEventListener('click', function(){
+            window.open(code, '_blank','width=640,height=480');
+         }, false);
+         f.querySelector("code").insertAdjacentElement('beforeEnd', button);
       })
    }
+
+   Main();
 })();
